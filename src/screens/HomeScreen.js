@@ -37,11 +37,11 @@ const HomeScreen = ({ match }) => {
       <h1>Latest Products</h1>
       {loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> :
         <>
-          <Row className="h-100">
+          <Row>
             {
               searchProducts && searchProducts.length ?
                 searchProducts.slice(currentPage * 20 - 20, currentPage * 20).map((product, i) => (
-                  <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
+                  <Col className="mb-4" key={product.id} sm={12} md={6} lg={4} xl={3}>
                     <Product
                       product={product}
                       img={images[i % 5]}
@@ -50,7 +50,7 @@ const HomeScreen = ({ match }) => {
                   </Col>
                 )) :
                 products.slice(currentPage * 20 - 20, currentPage * 20).map((product, i) => (
-                  <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
+                  <Col className="mb-4" key={product.id} sm={12} md={6} lg={4} xl={3}>
                     <Product
                       product={product}
                       img={images[i % 5]}

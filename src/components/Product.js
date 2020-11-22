@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 
 const Product = ({ product, img }) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded h-100">
       <Link to={`/product/${product.id}?name=${product.name}&&img=${img.image}&&ounce=${product.ounces}&&abv=${product.abv}`}>
         <Card.Img height="200px" src={img.image} variant='top' />
       </Link>
