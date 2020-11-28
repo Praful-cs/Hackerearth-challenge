@@ -26,7 +26,7 @@ const HomeScreen = ({ match, history }) => {
       setSeacrhProducts(arr);
       setkeyWord(keyword);
     }
-  }, [dispatch, keyWord]);
+  }, [dispatch, keyword]);
 
   const updatePage = (page, keyword) => {
     if (keyword) {

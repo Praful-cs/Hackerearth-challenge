@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup } from 'react-bootstrap';
 
-const ProductScreen = () => {
+const ProductScreen = ({ history }) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -18,9 +18,9 @@ const ProductScreen = () => {
 
   return (
     <>
-      <Link className="btn btn-dark my-3" to="/">
+      <button className="btn btn-dark my-3" onClick={history.goBack}>
         Go Back
-      </Link>
+      </button>
       <Row>
         <Col md={6}>
           <Image src={product.image} alt={product.name} fluid />
