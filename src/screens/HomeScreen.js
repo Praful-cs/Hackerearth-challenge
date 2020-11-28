@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 import { listProducts, listProductImages } from '../actions/productActions';
 
-const HomeScreen = ({ match }) => {
+const HomeScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const keyword = match.params.keyword || '';
   const [currentPage, setCurrentPage] = useState(match.params.pageNumber || 1);
@@ -28,8 +28,13 @@ const HomeScreen = ({ match }) => {
     }
   }, [dispatch, keyWord]);
 
-  const updatePage = () => {
-    setCurrentPage(match.params.pageNumber);
+  const updatePage = (page, keyword) => {
+    if (keyword) {
+      history.push(`/search/${keyword}/page/${page}`);
+    } else {
+      history.push(`/page/${page}`);
+    }
+    setCurrentPage(page);
   };
 
   return (
@@ -41,7 +46,7 @@ const HomeScreen = ({ match }) => {
             {
               searchProducts && searchProducts.length ?
                 searchProducts.slice(currentPage * 20 - 20, currentPage * 20).map((product, i) => (
-                  <Col className="mb-4" key={product.id} sm={12} md={6} lg={4} xl={3}>
+                  <Col className="mb-5" key={product.id} sm={12} md={6} lg={4} xl={3}>
                     <Product
                       product={product}
                       img={images[i % 5]}
@@ -50,7 +55,7 @@ const HomeScreen = ({ match }) => {
                   </Col>
                 )) :
                 products.slice(currentPage * 20 - 20, currentPage * 20).map((product, i) => (
-                  <Col className="mb-4" key={product.id} sm={12} md={6} lg={4} xl={3}>
+                  <Col className="mb-5" key={product.id} sm={12} md={6} lg={4} xl={3}>
                     <Product
                       product={product}
                       img={images[i % 5]}
@@ -60,7 +65,7 @@ const HomeScreen = ({ match }) => {
                 ))
             }
           </Row>
-          <Paginate updatePage={updatePage} pages={Math.ceil(products.length / 20)} page={currentPage} />
+          <Paginate keyword={keyWord} updatePage={updatePage} pages={searchProducts.length ? Math.ceil(searchProducts.length / 20) : Math.ceil(products.length / 20)} page={currentPage} />
         </>
       }
     </>
